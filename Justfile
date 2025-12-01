@@ -89,11 +89,23 @@ sudoif command *args:
 build $target_image=image_name $tag=default_tag:
     #!/usr/bin/env bash
 
+    # collect build args
     BUILD_ARGS=()
+
+    # include SHA if working dir clean
     if [[ -z "$(git status -s)" ]]; then
         BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
     fi
 
+    # Add TEAM_ID + GROUP_ID from env vars (GitHub Actions will inject them)
+    if [[ -n "${TEAM_ID:-}" ]]; then
+        BUILD_ARGS+=("--build-arg" "TEAM_ID=${TEAM_ID}")
+    fi
+    if [[ -n "${GROUP_ID:-}" ]]; then
+        BUILD_ARGS+=("--build-arg" "GROUP_ID=${GROUP_ID}")
+    fi
+
+    # build image
     podman build \
         "${BUILD_ARGS[@]}" \
         --pull=newer \
