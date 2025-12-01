@@ -120,10 +120,9 @@ jobs:
           tags: ${{ steps.metadata.outputs.tags }}
           labels: ${{ steps.metadata.outputs.labels }}
           oci: false
-
           build-args: |
-            TEAM_ID=${{ env.TEAM_ID }}
-            GROUP_ID=${{ env.GROUP_ID }} 
+            TEAM_ID=${{ vars.TEAM_ID }}
+            GROUP_ID=${{ vars.GROUP_ID }} 
 
       # Rechunk is a script that we use on Universal Blue to make sure there isnt a single huge layer when your image gets published.
       # This does not make your image faster to download, just provides better resumability and fixes a few errors.
