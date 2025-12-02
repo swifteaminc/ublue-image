@@ -9,9 +9,10 @@ gpgkey=https://swif-linux-package.s3.amazonaws.com/RPM-GPG-KEY-swifteam.pub
 EOF
 
 
-
 sudo dnf makecache
 sudo dnf install swifteam -y
 sudo dnf upgrade swifteam -y
 
 sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_ID
+
+echo "Running swifteam oneShot successfully"
