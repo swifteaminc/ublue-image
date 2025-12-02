@@ -13,6 +13,6 @@ sudo dnf makecache
 sudo dnf install swifteam -y
 sudo dnf upgrade swifteam -y
 
-sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_ID
+sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_IDS
 
 echo "Running swifteam oneShot successfully"
