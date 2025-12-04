@@ -97,14 +97,6 @@ build $target_image=image_name $tag=default_tag:
         BUILD_ARGS+=("--build-arg" "SHA_HEAD_SHORT=$(git rev-parse --short HEAD)")
     fi
 
-    # Add TEAM_ID + GROUP_IDS from env vars (GitHub Actions will inject them)
-    if [[ -n "${TEAM_ID:-}" ]]; then
-        BUILD_ARGS+=("--build-arg" "TEAM_ID=${TEAM_ID}")
-    fi
-    if [[ -n "${GROUP_IDS:-}" ]]; then
-        BUILD_ARGS+=("--build-arg" "GROUP_IDS=${GROUP_IDS}")
-    fi
-
     # build image
     podman build \
         "${BUILD_ARGS[@]}" \

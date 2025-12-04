@@ -1,5 +1,5 @@
 echo "TEAM_ID: $TEAM_ID"
-echo "GROUP_ID: $GROUP_ID"
+echo "GROUP_IDS: $GROUP_IDS"
 echo "LEVEL: $LEVEL"
 echo "AGENT_URL: $AGENT_URL"
 
@@ -24,4 +24,4 @@ if [ -n "$AGENT_URL" ]; then
     sudo chmod +x /usr/bin/swifteam
 fi
 
-sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_ID
+sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_IDS

@@ -30,12 +30,12 @@ FROM ghcr.io/ublue-os/bluefin:stable
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
 ARG TEAM_ID
-ARG GROUP_ID
+ARG GROUP_IDS
 ARG LEVEL
 ARG AGENT_URL
 
 ENV TEAM_ID=${TEAM_ID} \
-    GROUP_ID=${GROUP_ID} \
+    GROUP_IDS=${GROUP_IDS} \
     LEVEL=${LEVEL} \
     AGENT_URL=${AGENT_URL}
 
