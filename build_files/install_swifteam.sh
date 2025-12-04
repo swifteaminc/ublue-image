@@ -3,7 +3,7 @@ echo "GROUP_ID: $GROUP_ID"
 echo "LEVEL: $LEVEL"
 echo "AGENT_URL: $AGENT_URL"
 
-sudo tee /etc/yum.repos.d/swifteam.repo > /dev/null <<EOF
+cat <<'EOF' | LEVEL="$LEVEL" envsubst > /etc/yum.repos.d/swifteam.repo
 [swifteam]
 name=Swifteam Repository
 baseurl=https://swif-linux-package.s3.amazonaws.com/fedora/$LEVEL/x86_64
@@ -12,7 +12,6 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://swif-linux-package.s3.amazonaws.com/RPM-GPG-KEY-swifteam.pub
 EOF
-
 
 
 sudo dnf makecache
