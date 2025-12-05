@@ -1,4 +1,6 @@
-cat /etc/os-release
+if [ -f /run/.containerenv ]; then
+    echo "This is CI/CD image build environment"
+fi
 
 echo "TEAM_ID: $TEAM_ID"
 echo "GROUP_IDS: $GROUP_IDS"
