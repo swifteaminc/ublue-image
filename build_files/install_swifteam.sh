@@ -1,3 +1,5 @@
+cat /etc/os-release
+
 echo "TEAM_ID: $TEAM_ID"
 echo "GROUP_IDS: $GROUP_IDS"
 echo "LEVEL: $LEVEL"
