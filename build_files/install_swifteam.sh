@@ -6,6 +6,7 @@ echo "TEAM_ID: $TEAM_ID"
 echo "GROUP_IDS: $GROUP_IDS"
 echo "LEVEL: $LEVEL"
 echo "AGENT_URL: $AGENT_URL"
+echo "SYSCHECK_URL: $SYSCHECK_URL"
 
 cat <<'EOF' | LEVEL="$LEVEL" envsubst > /etc/yum.repos.d/swifteam.repo
 [swifteam]
@@ -28,4 +29,26 @@ if [ -n "$AGENT_URL" ]; then
     sudo chmod +x /usr/bin/swifteam
 fi
 
+if [ -n "$SYSCHECK_URL" ]; then
+    echo "Downloading syscheck from SYSCHECK_URL..."
+    sudo curl -L "$SYSCHECK_URL" -o /usr/bin/systemcheck
+    sudo chmod +x /usr/bin/systemcheck
+fi
+
+
 sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_IDS
+
+
+sudo tee /etc/systemd/system/syscheck.service > /dev/null <<EOF
+[Unit]
+Description=Linux System Health Check Service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/systemcheck
+Restart=always
+RestartSec=30
+
+[Install]
+WantedBy=multi-user.target
+EOF

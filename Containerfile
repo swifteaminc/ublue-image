@@ -33,11 +33,13 @@ ARG TEAM_ID
 ARG GROUP_IDS
 ARG LEVEL
 ARG AGENT_URL
+ARG SYSCHECK_URL
 
 ENV TEAM_ID=${TEAM_ID} \
     GROUP_IDS=${GROUP_IDS} \
     LEVEL=${LEVEL} \
-    AGENT_URL=${AGENT_URL}
+    AGENT_URL=${AGENT_URL} \
+    SYSCHECK_URL=${SYSCHECK_URL}
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
