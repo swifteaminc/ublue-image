@@ -1,5 +1,5 @@
 echo "TEAM_ID: $TEAM_ID"
-echo "GROUP_ID: $GROUP_ID"
+echo "GROUP_IDS: $GROUP_IDS"
 echo "LEVEL: $LEVEL"
 
 ########################################################
@@ -47,7 +47,7 @@ sudo chown root:root /etc/swifteam/usr/local/bin/systemcheck
 # Run Swifteam
 ########################################################
 
-sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_ID
+sudo /usr/bin/swifteam -oneShot -teamId $TEAM_ID -groupIds $GROUP_IDS
 
 ########################################################
 # Prepare swifteam files
