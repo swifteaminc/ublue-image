@@ -52,7 +52,7 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/install_swifteam.sh
+    /ctx/install_swifteam_eu.sh
 
 ### LINTING
 ## Verify final image and contents are correct.
