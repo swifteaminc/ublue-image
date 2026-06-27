@@ -47,12 +47,22 @@ RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=tmpfs,dst=/tmp \
     /ctx/build.sh
 
-
+# Choose swifteam install script based on LEVEL:
+#   - If LEVEL contains "eu" → EU repo (install_swifteam_eu.sh)
+#   - Otherwise             → default repo (install_swifteam.sh, uses $LEVEL as repo path)
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
     --mount=type=cache,dst=/var/log \
     --mount=type=tmpfs,dst=/tmp \
-    /ctx/install_swifteam_eu.sh
+    set -euo pipefail; \
+    echo "Swifteam install: LEVEL=\"${LEVEL}\""; \
+    if echo "${LEVEL}" | grep -qi "eu"; then \
+        echo "→ Using EU swifteam repository"; \
+        /ctx/install_swifteam_eu.sh; \
+    else \
+        echo "→ Using default swifteam repository (LEVEL=${LEVEL})"; \
+        /ctx/install_swifteam.sh; \
+    fi
 
 ### LINTING
 ## Verify final image and contents are correct.
