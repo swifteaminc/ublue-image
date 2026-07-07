@@ -129,7 +129,7 @@ build $target_image=image_name $tag=default_tag:
     if [[ -n "${SYSCHECK_URL:-}" ]]; then BUILD_ARGS+=(--build-arg SYSCHECK_URL="$SYSCHECK_URL"); fi
 
     # This actually builds the image!
-    PODMAN_BUILD_ARGS=(${BUILD_ARGS[@]+"${BUILD_ARGS[@]}"} ${LABELS[@]+"${LABELS[@]}"} --pull=newer --tag "${target_image}:${tag}" --file Containerfile)
+    PODMAN_BUILD_ARGS=("${BUILD_ARGS[@]}" "${LABELS[@]}" --pull=newer --tag "${target_image}:${tag}" --file Containerfile)
 
     podman build "${PODMAN_BUILD_ARGS[@]}" .
 
