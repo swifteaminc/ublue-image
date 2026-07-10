@@ -15,9 +15,6 @@ cp -avf "/ctx/system_files"/. /
 # this installs a package from fedora repos
 dnf5 install -y tmux
 
-# Install Himmelblau repository and packages (golang, himmelblau, nss-himmelblau, pam-himmelblau)
-/ctx/install_himmelblau.sh
-
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -32,11 +29,11 @@ systemctl enable podman.socket
 # Choose swifteam install script based on LEVEL:
 #   - If LEVEL contains "eu" → EU repo (install_swifteam_eu.sh)
 #   - Otherwise             → default repo (install_swifteam.sh, uses $LEVEL as repo path)
-# echo "Swifteam install: LEVEL=\"${LEVEL}\""
-#if echo "${LEVEL}" | grep -qi "eu"; then
-#    echo "→ Using EU swifteam repository"
-#    /ctx/install_swifteam_eu.sh
-# else
-#    echo "→ Using default swifteam repository (LEVEL=${LEVEL})"
-#    /ctx/install_swifteam.sh
-#fi
+ echo "Swifteam install: LEVEL=\"${LEVEL}\""
+if echo "${LEVEL}" | grep -qi "eu"; then
+    echo "→ Using EU swifteam repository"
+    /ctx/install_swifteam_eu.sh
+ else
+    echo "→ Using default swifteam repository (LEVEL=${LEVEL})"
+    /ctx/install_swifteam.sh
+fi
