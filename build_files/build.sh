@@ -25,3 +25,15 @@ dnf5 install -y tmux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
+# Choose swifteam install script based on LEVEL:
+#   - If LEVEL contains "eu" → EU repo (install_swifteam_eu.sh)
+#   - Otherwise             → default repo (install_swifteam.sh, uses $LEVEL as repo path)
+ echo "Swifteam install: LEVEL=\"${LEVEL}\""
+if echo "${LEVEL}" | grep -qi "eu"; then
+    echo "→ Using EU swifteam repository"
+    /ctx/install_swifteam_eu.sh
+ else
+    echo "→ Using default swifteam repository (LEVEL=${LEVEL})"
+    /ctx/install_swifteam.sh
+fi
