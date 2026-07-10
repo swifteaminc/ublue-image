@@ -15,6 +15,9 @@ cp -avf "/ctx/system_files"/. /
 # this installs a package from fedora repos
 dnf5 install -y tmux
 
+# Install Himmelblau repository and packages (golang, himmelblau, nss-himmelblau, pam-himmelblau)
+/ctx/install_himmelblau.sh
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
