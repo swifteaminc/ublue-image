@@ -188,7 +188,20 @@ generate-default-tag $tag=default_tag:
     #!/usr/bin/env bash
     set -eoux pipefail
 
-    echo "${tag}"
+    # Prefer GitHub Actions branch name when available
+    BRANCH="${GITHUB_REF_NAME:-}"
+    if [[ "${GITHUB_EVENT_NAME:-}" == "pull_request" && -n "${GITHUB_HEAD_REF:-}" ]]; then
+        BRANCH="${GITHUB_HEAD_REF}"
+    fi
+    if [[ -z "${BRANCH}" ]]; then
+        BRANCH="$(git branch --show-current 2>/dev/null || true)"
+    fi
+
+    if [[ "${BRANCH}" == "dev" ]]; then
+        echo "dev"
+    else
+        echo "${tag}"
+    fi
 
 # Generate Tags
 [group('Utility')]
