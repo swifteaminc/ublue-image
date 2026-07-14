@@ -7,7 +7,7 @@ cp -avf "/ctx/system_files"/. /
 
 ### Install packages
 # Install Himmelblau repository and packages (golang, himmelblau, nss-himmelblau, pam-himmelblau)
-/ctx/install_himmelblau.sh
+# /ctx/install_himmelblau.sh
 
 # Packages can be installed from any enabled yum repo on the image.
 # RPMfusion repos are available by default in ublue main images
